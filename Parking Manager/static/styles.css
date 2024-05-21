@@ -1,0 +1,204 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+nav .plate-inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+nav input {
+    margin: 5px;
+    padding: 10px;
+    width: 60px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 1rem;
+    transition: box-shadow 0.2s ease;
+}
+
+nav input:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.8);
+    outline: none;
+}
+
+nav .flag {
+    width: 30px;
+    height: auto;
+    margin: 5px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.main-container {
+    flex: 3;
+}
+
+.info-section {
+    flex: 1;
+    margin-left: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.info-section p {
+    margin: 5px 0;
+    font-size: 1.2rem;
+}
+
+.parking-section {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.parking-section h2 {
+    text-align: center;
+    color: #007BFF;
+}
+
+.scrollable {
+    max-height: 230px;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+}
+
+.rtl {
+    direction: rtl;
+    text-align: center;
+}
+
+.button {
+  --bg: #000;
+  --hover-bg: #ffffff;
+  --hover-text: #000;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid var(--bg);
+  border-radius: 4px;
+  padding: 0.8em 2em;
+  background: var(--bg);
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+.button:hover {
+  color: var(--hover-text);
+  transform: translate(-0.25rem, -0.25rem);
+  background: var(--hover-bg);
+  box-shadow: 0.25rem 0.25rem var(--bg);
+}
+
+.button:active {
+  transform: translate(0);
+  box-shadow: none;
+}
+
+/* Base styles for the error message */
+.error-message {
+    display: none; /* Initially hidden */
+    background-color: #ffdddd;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: fadeInOut 5s forwards; /* Animation for fade in and out */
+}
+
+/* Keyframes for the fade in and out animation */
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Show the error message with JavaScript */
+.show {
+    display: block;
+}
+
+/* Optional: a close button for the error message */
+.error-message .close-btn {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+    color: #d8000c;
+}
+.error-message .close-btn:hover {
+    color: #b30000;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>مدیریت پارکینگ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <form action="{{ url_for('park_car') }}" method="POST" class="plate-form">
+            <div class="plate-inputs">
+                <input type="text" id="plate_part1" name="plate_part1" required maxlength="2" placeholder="- -">&nbsp;&nbsp;
+                <input type="text" id="plate_letter" name="plate_letter" required maxlength="1" placeholder="-">&nbsp;&nbsp;
+                <input type="text" id="plate_part2" name="plate_part2" required maxlength="3" placeholder="- - -">&nbsp;
+                <span>ایران</span>&nbsp;
+                <input type="text" id="plate_part3" name="plate_part3" required maxlength="2" placeholder="- -">&nbsp;
+                <img src="{{ url_for('static', filename='images/iran_flag.png') }}" alt="Iran Flag" class="flag">&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" class="button"><i class="fas fa-car"></i>&nbsp;&nbsp;ثبت</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{{ url_for('history') }}" class="button"><i class="far fa-sticky-note"></i>&nbsp;&nbsp;تاریخچه ثبت</a>
+            </div>
+        </form>
+    </nav>
+    <div class="container">
+        {% if error_message %}
+        <div class="error-message" id="error-message">
+            <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <p>مشکلی در بارگیری داده‌ها رخ داده است. لطفاً دوباره تلاش کنید.</p>
+        </div>
+        {% endif %}
+        <div class="main-container">
+            <div class="parking-section">
+                <h2>لیست خودروهای پارک شده</h2>
+                <div class="scrollable">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>پلاک خودرو</th>
+                                <th>ساعت ورود</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for car in parked_cars %}
+                            <td class="rtl">
+                                {% set plate = car[1] %}
+                                {{ plate[:2] }} - {{ plate[2] }} - {{ plate[3:6] }} ایران {{ plate[6:] }}
+                            </td>
+                            <td>{{ car[2].split(' ')[1][:5] }}</td>
+                                <td><button class="button" onclick="exitCar({{ car[0] }})"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;خروج</button></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <p>فضای باقی‌مانده -> {{ free_spaces }}</p>
+            <p>فضای اشغال‌ شده -> {{ occupied_spaces }}</p>
+        </div>
+    </div>
+    <script>
+        function exitCar(carId) {
+            fetch(`/exit/${carId}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    alert(`مدت زمان پارک: ${data.duration}\nهزینه: ${data.cost} تومان`);
+                    location.reload();
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const errorMessage = document.getElementById('error-message');
+            if (errorMessage) {
+                errorMessage.classList.add('show');
+            }
+        });
+
+    </script>
+</body>
+</html>
